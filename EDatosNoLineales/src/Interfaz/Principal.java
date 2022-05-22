@@ -114,7 +114,6 @@ public class Principal extends javax.swing.JFrame {
                     while ((linea = br.readLine()) != null) {
                         String arreglo[] = linea.split(",");
                         numColumnas = arreglo.length;
-                        System.out.println(numColumnas);
 
                         if (arreglo.length != 3) {
                             JOptionPane.showMessageDialog(null, "Numero de columnas erroneo");
