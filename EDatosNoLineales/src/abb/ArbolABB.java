@@ -35,7 +35,7 @@ public class ArbolABB {
   }
   
   public void insertar(Object o){
-    insertarOrdenado(raiz,o);
+    insertarOrdenadoInt(raiz,o);
   }
   
   public void borrar(Object o){
@@ -81,19 +81,19 @@ public class ArbolABB {
        return n.getDer();
   }
   
-  private void insertarOrdenado(NodoBin n, Object o){  
+  private void insertarOrdenadoInt(NodoBin n, Object o){  
   if ((int)o<(int)n.getDato()){
      if (n.getIzq()==null)
          n.setIzq(new NodoBin(o));
      else
-         insertarOrdenado(n.getIzq(),o);
+         insertarOrdenadoInt(n.getIzq(),o);
      }
   else{
   if((int)o>(int)n.getDato()){
     if (n.getDer()==null)
        n.setDer(new NodoBin(o));
     else
-       insertarOrdenado(n.getDer(),o);     
+       insertarOrdenadoInt(n.getDer(),o);     
      }  
      }
   }
