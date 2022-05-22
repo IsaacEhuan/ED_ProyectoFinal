@@ -4,6 +4,8 @@
  */
 package abb;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jorge.reyes
@@ -12,19 +14,36 @@ public class NodoBin {
     protected Object dato;
     protected NodoBin izq;
     protected NodoBin der;
+    protected ArrayList<Integer> duplicados;
 
     public NodoBin(Object dato, NodoBin izq, NodoBin der) {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
+        duplicados = new ArrayList<Integer>();
     }
 
     public NodoBin(Object dato){
        this(dato,null,null);
+       duplicados = new ArrayList<Integer>();
     }
     
     public NodoBin(){
         this(null);
+        duplicados = new ArrayList<Integer>();
+    }
+
+    public void add(int i){
+        duplicados.add(i);
+    }
+    public ArrayList<Integer> getDuplicados(){
+        return duplicados;
+    }
+
+    public void printDuplicados(){
+        for(int i: duplicados){
+            System.out.print(i +" ");
+        }
     }
     
     /**

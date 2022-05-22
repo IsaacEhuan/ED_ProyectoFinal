@@ -40,13 +40,19 @@ public class NodoAVL extends NodoBin{
     public void inOrden(){
     if(izq!=null)
            ((NodoAVL)izq).inOrden();
-     System.out.println(dato + "| FE :" + FE);//Raiz
+     System.out.print(dato + "| FE :" + FE +" {");//Raiz
+     printDuplicados();
+     System.out.print("}");
+     System.out.println();
        if(der!=null)
            ((NodoAVL)der).inOrden();
     }
     
     public void preOrden(){
-    System.out.println(dato + "| FE :" + FE);//Raiz
+        System.out.print(dato + "| FE :" + FE +" {");//Raiz
+        printDuplicados();
+        System.out.print("}");
+        System.out.println();
         if(izq!=null)
            ((NodoAVL)izq).preOrden();     
        if(der!=null)
@@ -58,7 +64,10 @@ public class NodoAVL extends NodoBin{
            ((NodoAVL)izq).posOrden();     
        if(der!=null)
            ((NodoAVL)der).posOrden();
-       System.out.println(dato + "| FE :" + FE);//Raiz
+           System.out.print(dato + "| FE :" + FE +" {");//Raiz
+           printDuplicados();
+           System.out.print("}");
+           System.out.println();
     }
     
     /**
