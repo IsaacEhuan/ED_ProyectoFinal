@@ -4,7 +4,6 @@
  */
 package avl;
 
-import Arboles.Egresado;
 
 /**
  *
@@ -46,17 +45,14 @@ public class ArbolAVL {
   }
 
   //Insertar NUEVOS
-  public void insertarP(Egresado e){
-    insertarOrdenadoProfesion(raiz, e);
+  public void insertarString(String s, int index){
+    insertarOrdenadoString(raiz, s, index);
   }
-    public void insertarN(Egresado e){
-      insertarOrdenadoNombre(raiz, e);
-    }
 
-    public void insertarC(Egresado e){
-      insertarOrdenadoCalificacion(raiz, e);
-    }
-    //.
+  public void insertarInt(int i, int index){
+    insertarOrdenadoEntero(raiz, i, index);
+  }
+  //.
     
    private void insertarOrdenado(NodoAVL n, Object o){  
   if ((int)o<(int)n.getDato()){
@@ -80,81 +76,55 @@ public class ArbolAVL {
   }
 
   //Insertar Nuevos modificados--------------------------------------------
-  private void insertarOrdenadoCalificacion(NodoAVL n, Egresado o){  
-    if (o.calificacion<((Egresado)n.getDato()).calificacion){
-       if (n.getIzq()==null){
-           n.setIzq(new NodoAVL(o,null,null,n));
-           n.getIzq().add(o.getIndex());
+    private void insertarOrdenadoEntero(NodoAVL n, int o, int index){  
+      if (o<(int)n.getDato()){
+         if (n.getIzq()==null){
+             n.setIzq(new NodoAVL(o,null,null,n));
+             n.getIzq().add(index);
+             recalcularFE(n);
+         }
+         else
+             insertarOrdenadoEntero((NodoAVL)n.getIzq(),o, index);
+         }
+      else{
+      if(o>(int)n.getDato()){
+        if (n.getDer()==null){
+           n.setDer(new NodoAVL(o,null,null,n));
+           n.getDer().add(index);
            recalcularFE(n);
-       }
-       else
-           insertarOrdenado((NodoAVL)n.getIzq(),o);
-       }
-    else{
-    if(o.calificacion>((Egresado)n.getDato()).calificacion){
-      if (n.getDer()==null){
-         n.setDer(new NodoAVL(o,null,null,n));
-         n.getDer().add(o.getIndex());
-         recalcularFE(n);
-          }
-      else
-         insertarOrdenado((NodoAVL)n.getDer(),o);     
-       }else if(o.calificacion==((Egresado)n.getDato()).calificacion){
-        n.add(o.getIndex());
-       }  
-       }
-    }
+            }
+        else
+           insertarOrdenadoEntero(n, o, index);     
+         }else if(o==(int)n.getDato()){
+          n.add(index);
+         }  
+         }
+      }
 
-
-  private void insertarOrdenadoProfesion(NodoAVL n, Egresado o){  
-    if (o.profesion.compareTo(((Egresado)n.getDato()).profesion)<0){
-       if (n.getIzq()==null){
-           n.setIzq(new NodoAVL(o,null,null,n));
-           n.getIzq().add(o.getIndex());
+    private void insertarOrdenadoString(NodoAVL n, String o, int index){  
+      if (o.compareTo((String)n.getDato())<0){
+         if (n.getIzq()==null){
+             n.setIzq(new NodoAVL(o,null,null,n));
+             n.getIzq().add(index);
+             recalcularFE(n);
+         }
+         else
+             insertarOrdenadoString(n, o, index);
+         }
+      else{
+      if(o.compareTo((String)n.getDato())>0){
+        if (n.getDer()==null){
+           n.setDer(new NodoAVL(o,null,null,n));
+           n.getDer().add(index);
            recalcularFE(n);
-       }
-       else
-           insertarOrdenado((NodoAVL)n.getIzq(),o);
-       }
-    else{
-    if(o.profesion.compareTo(((Egresado)n.getDato()).profesion)>0){
-      if (n.getDer()==null){
-         n.setDer(new NodoAVL(o,null,null,n));
-         n.getDer().add(o.getIndex());
-         recalcularFE(n);
-          }
-      else
-         insertarOrdenado((NodoAVL)n.getDer(),o);     
-       }else if(o.profesion.compareTo(((Egresado)n.getDato()).profesion)==0){
-          n.add(o.getIndex());
-       }  
-       }
-    }
-
-  private void insertarOrdenadoNombre(NodoAVL n, Egresado o){  
-    if (o.nombre.compareTo(((Egresado)n.getDato()).nombre)<0){
-       if (n.getIzq()==null){
-           n.setIzq(new NodoAVL(o,null,null,n));
-           n.getIzq().add(o.getIndex());
-           recalcularFE(n);
-       }
-       else
-           insertarOrdenado((NodoAVL)n.getIzq(),o);
-       }
-    else{
-    if(o.nombre.compareTo(((Egresado)n.getDato()).nombre)>0){
-      if (n.getDer()==null){
-         n.setDer(new NodoAVL(o,null,null,n));
-         n.getDer().add(o.getIndex());
-         recalcularFE(n);
-          }
-      else
-         insertarOrdenado((NodoAVL)n.getDer(),o);     
-       }else if(o.nombre.compareTo(((Egresado)n.getDato()).nombre)==0){
-          n.add(o.getIndex());
-       }  
-       }
-    }
+            }
+        else
+           insertarOrdenadoString(n, o, index);    
+         }else if(o.compareTo((String)n.getDato())==0){
+            n.add(index);
+         }  
+         }
+      }
    //-----------------------------------------------------------------------------
    public void recalcularFE(NodoAVL nodo){
      if (nodo!=null){
