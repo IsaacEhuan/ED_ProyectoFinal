@@ -21,7 +21,7 @@ public class Egresado {
     }
 
     public String toString(){
-        return String.valueOf(index)+"|"+nombre+","+profesion+","+calificacion;
+        return String.valueOf(index)+"|"+nombre+"|"+profesion+"|"+String.valueOf(calificacion);
     }
 
 
