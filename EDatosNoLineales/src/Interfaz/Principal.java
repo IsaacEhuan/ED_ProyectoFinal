@@ -23,6 +23,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        jButton2.setEnabled(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -132,6 +134,7 @@ public class Principal extends javax.swing.JFrame {
                 if (numColumnas == 3) {
 
                     JOptionPane.showMessageDialog(null, "Carga del archivo completa");
+                    jButton2.setEnabled(true);
                     
                 } else {
                     JOptionPane.showMessageDialog(null, "El numero de columnas es invalido o el archivo está vacío");
@@ -146,6 +149,8 @@ public class Principal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
         DatosTabla data=new DatosTabla();
+        data.setSize(600, 600);
+        data.setLocationRelativeTo(null);
         data.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
