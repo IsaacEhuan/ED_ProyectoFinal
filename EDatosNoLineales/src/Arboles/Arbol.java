@@ -17,9 +17,10 @@ public class Arbol {
 
         while(listaEgresados.hasNext()){
             Egresado actula = listaEgresados.next();
-            ArbolNombres.insertarN(actula);
-            ArbolProfesion.insertarP(actula);
-            ArbolCalificacion.insertarC(actula);
+            int index = actula.getIndex();
+            ArbolCalificacion.insertarInt(actula.calificacion, index);
+            ArbolNombres.insertarString(actula.nombre, index);
+            ArbolProfesion.insertarString(actula.profesion,index);
         }
     }
 
@@ -32,9 +33,9 @@ public class Arbol {
 
         //Inicializar siempre asi los arboles, de otra forma la raiz siempre es nula
         Egresado raiz = lista.get(0);
-        ArbolCalificacion = new ArbolAVL(raiz, raiz.getIndex());
-        ArbolNombres = new ArbolAVL(raiz, raiz.getIndex());
-        ArbolProfesion = new ArbolAVL(raiz, raiz.getIndex());
+        ArbolCalificacion = new ArbolAVL(raiz.calificacion, raiz.getIndex());
+        ArbolNombres = new ArbolAVL(raiz.nombre, raiz.getIndex());
+        ArbolProfesion = new ArbolAVL(raiz.profesion, raiz.getIndex());
 
         //Setear Los arboles para el resto del arreglo
         setArboles(lista.iterator());
