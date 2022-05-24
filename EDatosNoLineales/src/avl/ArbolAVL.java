@@ -77,6 +77,7 @@ public class ArbolAVL {
 
   //Insertar Nuevos modificados--------------------------------------------
     private void insertarOrdenadoEntero(NodoAVL n, int o, int index){  
+      System.out.println(o+" O " +n.getDato()+" n ");
       if (o<(int)n.getDato()){
          if (n.getIzq()==null){
              n.setIzq(new NodoAVL(o,null,null,n));
@@ -94,7 +95,7 @@ public class ArbolAVL {
            recalcularFE(n);
             }
         else
-           insertarOrdenadoEntero(n, o, index);     
+           insertarOrdenadoEntero((NodoAVL)n.getDer(), o, index);     
          }else if(o==(int)n.getDato()){
           n.add(index);
          }  
@@ -109,7 +110,7 @@ public class ArbolAVL {
              recalcularFE(n);
          }
          else
-             insertarOrdenadoString(n, o, index);
+             insertarOrdenadoString((NodoAVL)n.getIzq(), o, index);
          }
       else{
       if(o.compareTo((String)n.getDato())>0){
@@ -119,7 +120,7 @@ public class ArbolAVL {
            recalcularFE(n);
             }
         else
-           insertarOrdenadoString(n, o, index);    
+           insertarOrdenadoString((NodoAVL)n.getDer(), o, index);    
          }else if(o.compareTo((String)n.getDato())==0){
             n.add(index);
          }  

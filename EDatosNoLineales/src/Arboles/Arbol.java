@@ -3,12 +3,16 @@ package Arboles;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import archivos.LectorArchivo;
+import archivos.VerificadorArchivo;
 import avl.*;
 
 public class Arbol {
     public static ArbolAVL ArbolNombres;
     public static ArbolAVL ArbolProfesion;
     public static ArbolAVL ArbolCalificacion;
+
+    public static ArrayList<Egresado> listaEgresados;
 
 
     public static void setArboles(Iterator<Egresado> listaEgresados){
@@ -24,36 +28,66 @@ public class Arbol {
         }
     }
 
-    public static void main(String[] args) {
+    public static void obtenerInformacion(String archivo) throws Exception{
+        //Obtener Contenido
+        VerificadorArchivo.verificarExistenciaArchivo(archivo);
+        VerificadorArchivo.verificarArchivoVacio(archivo);
+        VerificadorArchivo.verificarNumeroColumnas(archivo, ',', 3);
+        
+        ArrayList <String[]> lista =LectorArchivo.obtenerContenido(archivo, ',');
 
-        //Creen el arrayList de egresados
-        ArrayList<Egresado> lista = new ArrayList<Egresado>();
-        lista.add(new Egresado("Abril Guadalupe Escobedo Bojórquez", "Licenciado en Derecho", 77));
-        lista.add(new Egresado("David Pat", "Licenciado en Derecho", 77));
+        //Construir la lista
+        listaEgresados = new ArrayList<Egresado>();
+        for(String[] actual: lista){
+            int calificacion = Integer.parseInt(actual[2]);
+            listaEgresados.add(new Egresado(actual[0], actual[1], calificacion));
+        }
+
+        /*
+        for(Egresado e: listaEgresados){
+            System.out.println(e);
+        }
+        */
 
         //Inicializar siempre asi los arboles, de otra forma la raiz siempre es nula
-        Egresado raiz = lista.get(0);
+        Egresado raiz = listaEgresados.get(0);
         ArbolCalificacion = new ArbolAVL(raiz.calificacion, raiz.getIndex());
         ArbolNombres = new ArbolAVL(raiz.nombre, raiz.getIndex());
         ArbolProfesion = new ArbolAVL(raiz.profesion, raiz.getIndex());
 
         //Setear Los arboles para el resto del arreglo
-        setArboles(lista.iterator());
+        setArboles(listaEgresados.iterator());
 
 
-        //Solo hay una calificacion
+
+    }
+
+    public static void main(String[] args) {
+
+        //Creen el arrayList de egresados
+        /*
+        ArrayList<Egresado> lista = new ArrayList<Egresado>();
+        lista.add(new Egresado("Abril Guadalupe Escobedo Bojórquez", "Licenciado en Derecho", 77));
+        lista.add(new Egresado("David Pat", "Licenciado en Derecho", 77));
+        */
+
+        //Como usar la clase
+        String nombreArchivo = "C:/Users/picar/Desktop/Software/Estructura de Datos/ProyectoFinal/ED_ProyectoFinal/EDatosNoLineales/src/Interfaz/Egresados.csv";
+
+        try {
+            obtenerInformacion(nombreArchivo);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("-Calificacione-");
         ArbolCalificacion.inOrden();
         
-        //Hay dos nombres
         System.out.println("-Nombre-");
         ArbolNombres.inOrden();
 
-        //Solo hay una profesion
         System.out.println("-Profesion-");
         ArbolProfesion.inOrden();
-
-        //Aunque sean de tipo Egresado los nodos, pues solo obtegan el dato que les importa dependiendo del arbol.
 
 
 
