@@ -7,6 +7,7 @@ package Interfaz;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import javax.swing.table.DefaultTableModel;
+import Arboles.Arbol;
 //CLASE EN LA QUE SE AGREGA Y MUESTRA LOS DATOS A LA TABLA
 /**
  *
@@ -47,6 +48,14 @@ public class DatosTabla extends javax.swing.JFrame {
 
                 }
             }
+            //Obtener info para los arboles
+            try{
+                Arbol.obtenerInformacion(ar.getRuta());
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

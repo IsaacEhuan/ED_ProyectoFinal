@@ -10,6 +10,7 @@ import java.io.FileReader;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import archivos.VerificadorArchivo;
 //CLASE EN LA QUE SE IMPORTA EL ARCHIVO, SE CHECAN LAS COLUMNAS, Y SOLO SE ACEPTAN 
 //ARCHIVOS CON EXTENSION .csv
 /**
@@ -101,47 +102,23 @@ public class Principal extends javax.swing.JFrame {
         JFileChooser seleccionarArchivo = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos csv", "csv");
         seleccionarArchivo.setFileFilter(filtro);
-        FileReader fr = null;
-        BufferedReader br = null;
-        int numColumnas=0;
         if (seleccionarArchivo.showDialog(this, "ABRIR CSV") == JFileChooser.APPROVE_OPTION) {
             File archivo = seleccionarArchivo.getSelectedFile();
             ArchivoImp ar=new ArchivoImp(archivo.getPath());
             if (archivo.getName().endsWith("csv")) {
                 try {
-                    fr = new FileReader(archivo);
-                    br = new BufferedReader(fr);
-                    String linea;
-                    while ((linea = br.readLine()) != null) {
-                        String arreglo[] = linea.split(",");
-                        numColumnas = arreglo.length;
-                        if (arreglo.length != 3) {
-                            JOptionPane.showMessageDialog(null, "Numero de columnas erroneo");
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        if (fr != null) {
-                            fr.close();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (numColumnas == 3) {
-
-                    JOptionPane.showMessageDialog(null, "Carga del archivo completa");
+                    VerificadorArchivo.verificarExistenciaArchivo(archivo.getPath());
+                    VerificadorArchivo.verificarArchivoVacio(archivo.getPath());
+                    VerificadorArchivo.verificarNumeroColumnas(archivo.getPath(), ',', 3);
+                    JOptionPane.showMessageDialog(null, "Archivo cargado con exito");
                     jButton2.setEnabled(true);
-                    
-                } else {
-                    JOptionPane.showMessageDialog(null, "El numero de columnas es invalido o el archivo está vacío");
+                } catch (Exception e) {
+                    //JOptionPane.showMessageDialog(null, "Archivo erroneo");
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "La extension del archivo es invalida");
+                
+                
             }
         }
     }//GEN-LAST:event_importarArchActionPerformed
