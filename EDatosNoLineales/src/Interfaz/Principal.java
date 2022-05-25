@@ -4,12 +4,12 @@
  */
 package Interfaz;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+
 import archivos.VerificadorArchivo;
 //CLASE EN LA QUE SE IMPORTA EL ARCHIVO, SE CHECAN LAS COLUMNAS, Y SOLO SE ACEPTAN 
 //ARCHIVOS CON EXTENSION .csv
@@ -104,7 +104,7 @@ public class Principal extends javax.swing.JFrame {
         seleccionarArchivo.setFileFilter(filtro);
         if (seleccionarArchivo.showDialog(this, "ABRIR CSV") == JFileChooser.APPROVE_OPTION) {
             File archivo = seleccionarArchivo.getSelectedFile();
-            ArchivoImp ar=new ArchivoImp(archivo.getPath());
+            ArchivoImp ar= new ArchivoImp(archivo.getPath());
             if (archivo.getName().endsWith("csv")) {
                 try {
                     VerificadorArchivo.verificarExistenciaArchivo(archivo.getPath());
@@ -113,9 +113,7 @@ public class Principal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Archivo cargado con exito");
                     jButton2.setEnabled(true);
                 } catch (Exception e) {
-                    //JOptionPane.showMessageDialog(null, "Archivo erroneo");
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null,e.getMessage());
                 }
                 
                 
