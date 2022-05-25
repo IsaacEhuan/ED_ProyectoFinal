@@ -20,7 +20,7 @@ public class VerificadorArchivo {
         String rutaAbsoluta = ruta;
         File archivo = new File(rutaAbsoluta);
         if(!archivo.exists()){
-            throw new Exception("El archivo 'usuario.txt' no existe o \n se encuentra en directorio diferente"
+            throw new Exception("El archivo 'Egresados.csv' no existe o \n se encuentra en directorio diferente"
                     + "\n Ruta: "+ archivo.getAbsolutePath());
         }
     }
