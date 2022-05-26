@@ -10,7 +10,7 @@ package avl;
  * @author jorge.reyes
  */
 public class ArbolAVL {
-  protected NodoAVL raiz;
+  public NodoAVL raiz;
     
     public ArbolAVL(){
       raiz = null;
@@ -170,7 +170,6 @@ public class ArbolAVL {
    }
   }
    
-   
    public void rotacionII(NodoAVL nodo){
    //Establecer los apuntadores..
     NodoAVL Padre = nodo.getPadre();   
@@ -319,21 +318,29 @@ public class ArbolAVL {
      R.setFE(0);
    }
    
+     //BUSQUEDAS(?)
+
+
     public static void main(String[] args) {
     ArbolAVL arbol = new ArbolAVL(55); 
-    arbol.insertar(34);
-    arbol.insertar(23);
-    arbol.insertar(83);
-    arbol.insertar(1);
-    arbol.insertar(100);
-    arbol.insertar(3);
-    arbol.insertar(45);
-    arbol.insertar(1000);    
-    arbol.inOrden();
-    
+      arbol.insertar(34);
+      arbol.insertar(23);
+      arbol.insertar(83);
+      arbol.insertar(1);
+      arbol.insertar(100);
+      arbol.insertar(3);
+      arbol.insertar(45);
+      arbol.insertar(1000);    
+      System.out.println("Inorden");
+      arbol.inOrden();
+      /*System.out.println("Posorden");
+      arbol.posOrden();
+      System.out.println("Preorden");
+      arbol.preOrden();*/
+      System.out.println("Raiz");
+      System.out.println(arbol.raiz.getDato());
     }
-   
-    
+
 }
 
 

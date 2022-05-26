@@ -73,6 +73,17 @@ public abstract class Lista {
     public boolean vacio(){
         return inicio==null;
     }
+
+    public int tamanio(){
+        Nodo actual = inicio;
+        int i=0;
+        while (actual!=null){
+            i++;
+            actual = actual.getSiguiente();
+        }
+
+        return i;
+    }
     
     public void imprimir(){
     Nodo actual = inicio;

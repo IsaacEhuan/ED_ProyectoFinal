@@ -5,6 +5,7 @@ package Arboles;
 import archivos.LectorArchivo;
 import archivos.VerificadorArchivo;
 import avl.*;
+import listas.*;
 
 public class Arbol {
     public static ArbolAVL ArbolNombres;
@@ -21,6 +22,7 @@ public class Arbol {
             ArbolCalificacion.insertarInt(actula.calificacion, i);
             ArbolNombres.insertarString(actula.nombre, i);
             ArbolProfesion.insertarString(actula.profesion,i);
+            
         }
     }
 
@@ -37,24 +39,11 @@ public class Arbol {
 
         //Construir la lista
         listaEgresados = new Egresado[lineas];
-        /*
-        for(String[] actual: lista){
-            int calificacion = Integer.parseInt(actual[2]);
-            listaEgresados[i] = new Egresado(actual[0], actual[1], calificacion);
-            System.out.println(listaEgresados[i]);
-        }
-        */
         for(int i=0;i< lineas;i++){
             String[] actual = lista[i];
             int calificacion = Integer.parseInt(actual[2]);
             listaEgresados[i] = new Egresado(actual[0], actual[1], calificacion);
         }
-
-        /*
-        for(Egresado e: listaEgresados){
-            System.out.println(e);
-        }
-        */
 
         //Inicializar siempre asi los arboles, de otra forma la raiz siempre es nula
         Egresado raiz = listaEgresados[0];
@@ -68,18 +57,98 @@ public class Arbol {
 
 
     }
+//-----------------------Funciones de busqueda-------------------------------------
+    public static ListaSimple busquedaIndividual(String comparador, ArbolAVL arbol){
+       ListaSimple referencias = new ListaSimple();
+        boolean band=true;
+        NodoAVL nodoActual = arbol.raiz;
+       // NodoAVL nodoAux = null;
+      
+            while(band){
+                if(((String)nodoActual.getDato()).equals(comparador)){
+                    referencias = nodoActual.getDuplicados();
+                    band=false;
+                } else{
+                    if (((String)nodoActual.getDato()).compareTo(comparador)<0){
+                        nodoActual = (NodoAVL)nodoActual.getDer();
+                       
+                    } else{
+                        nodoActual = (NodoAVL)nodoActual.getIzq(); 
+                    }
+                
+                  }
+                }
+            
+        return referencias;
+    
+    
+    }
+
+
+    public static ListaSimple busquedaIndividual(int comparador, ArbolAVL arbol){
+        ListaSimple referencias = new ListaSimple();
+        boolean band=true;
+        NodoAVL nodoActual = arbol.raiz;
+      
+            while(band){
+                if((int)nodoActual.getDato() == comparador){
+                    referencias = nodoActual.getDuplicados();
+                    band=false;
+                } else{
+                    if((int)nodoActual.getDato() > comparador){
+                        nodoActual = (NodoAVL)nodoActual.getIzq();
+                    } else{
+                        nodoActual = (NodoAVL)nodoActual.getDer();
+                    }
+                }
+            }
+            
+        
+        return referencias;
+    }
+
+    public static ListaSimple busquedaDoble(int comparador,String comparador2){
+        //Esta función puede filtrar el promedio y el otro parametro (profesión)
+        ListaSimple promedio = busquedaIndividual(comparador, ArbolCalificacion);
+        ListaSimple profesion = busquedaIndividual(comparador2, ArbolProfesion);
+        ListaSimple retorno = new ListaSimple();
+        Nodo actualProfesion = profesion.getInicio();
+        Nodo actualPromedio = promedio.getInicio();
+
+        while (actualProfesion != null && actualPromedio != null){
+            if((int)actualProfesion.getDato() == (int)actualPromedio.getDato()){
+                retorno.insertaFinal(actualPromedio.getDato());
+                actualProfesion = actualProfesion.getSiguiente();
+                actualPromedio = actualPromedio.getSiguiente();
+            } else{
+                if((int)actualProfesion.getDato() < (int)actualPromedio.getDato()){
+                    actualProfesion = actualProfesion.getSiguiente();
+                } else{
+                    actualPromedio = actualPromedio.getSiguiente(); 
+                }
+            }
+            System.out.println("");
+        }
+        return retorno;
+      }
+    /*  Esta busqueda no tiene caso, basta con el nombre exacto
+    public static void busquedaDoble(String comparador,String comparador2, ArbolAVL arbol){
+        //Esta funcion solo puede filtrar nombre y promedio
+      
+      }*/  
+
+//-------------------------------------------------------------------------------------    
 
     public static void main(String[] args) {
-
-        //Creen el arrayList de egresados
-        /*
-        ArrayList<Egresado> lista = new ArrayList<Egresado>();
-        lista.add(new Egresado("Abril Guadalupe Escobedo Bojórquez", "Licenciado en Derecho", 77));
-        lista.add(new Egresado("David Pat", "Licenciado en Derecho", 77));
-        */
-
-        //Como usar la clase
+        
+        //Ruta de Pat:
         String nombreArchivo = "C:/Users/picar/Desktop/Software/Estructura de Datos/ProyectoFinal/ED_ProyectoFinal/EDatosNoLineales/src/Interfaz/Egresados.csv";
+        
+        //Ruta Isaac
+        //String nombreArchivo = "C:\\Users\\isaac\\Downloads\\ED_ProyectFinal\\ED_ProyectoFinal\\EDatosNoLineales\\src\\Interfaz\\Egresados.csv";
+        
+        //Ruta de Daroz:
+        //String nombreArchivo = "/home/daroz/Programas/Estrucutra/proyecto/ED_ProyectoFinal/EDatosNoLineales/src/Interfaz/Egresados.csv";
 
         try {
             obtenerInformacion(nombreArchivo);
@@ -89,14 +158,29 @@ public class Arbol {
 
         System.out.println("-Calificacione-");
         ArbolCalificacion.inOrden();
-        
+        System.out.println("Indices con 90: ");
+        busquedaIndividual(90, ArbolCalificacion).imprimir();
+        //System.out.println(ArbolCalificacion.raiz.getDato());
         System.out.println("-Nombre-");
-        ArbolNombres.inOrden();
+        //ArbolNombres.inOrden();
 
         System.out.println("-Profesion-");
         ArbolProfesion.inOrden();
 
+        
 
+        System.out.println("");
+        System.out.println("");
+        //System.out.println(ArbolProfesion.raiz.getDato());
+
+        //System.out.println("Buscando la carrera: Arquitecto");
+        //busquedaIndividual("Mdico Cirujano", ArbolProfesion).imprimir();
+        System.out.println("");
+
+        /*System.out.println("Buscando el nombre: Jorge Antonio Zumárraga Novelo");
+        busquedaIndividual("Jorge Antonio Zumárraga Novelo", ArbolNombres).imprimir();
+        System.out.println("");*/
+        //busquedaDoble(77, "Médico Veterinario Zootecnista").imprimir();
 
     }
     
