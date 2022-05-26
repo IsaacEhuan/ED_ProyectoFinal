@@ -71,18 +71,38 @@ public class Arbol {
 
     }
 //-----------------------Funciones de busqueda-------------------------------------
-    public static void busquedaIndividual(String comparador, ArbolAVL arbol){
-      //Esta función puede filtrar tanto nombre como profesión
+    public static ListaSimple busquedaIndividual(String comparador, ArbolAVL arbol){
+       ListaSimple referencias = null;
+        boolean band=true;
+        NodoAVL nodoActual = arbol.raiz;
+       // NodoAVL nodoAux = null;
+      
+            while(band){
+                if(((String)nodoActual.getDato()).equals(comparador)){
+                    referencias = nodoActual.getDuplicados();
+                    band=false;
+                } else{
+                    if (((String)nodoActual.getDato()).compareTo(comparador)<0){
+                        nodoActual = (NodoAVL)nodoActual.getDer();
+                       
+                    } else{
+                        nodoActual = (NodoAVL)nodoActual.getIzq(); 
+                    }
+                
+                  }
+                }
+            
+        return referencias;
+    
     
     }
 
-    //NOTA: 1 = Mayor que, 2 = Menor que, 3 = Igual a
-    public static ListaSimple busquedaIndividual(int comparador, int opcion, ArbolAVL arbol){
+
+    public static ListaSimple busquedaIndividual(int comparador, ArbolAVL arbol){
         ListaSimple referencias = null;
         boolean band=true;
-        NodoAVL nodoActual = ArbolCalificacion.raiz;
-        switch(opcion){
-            case 1:
+        NodoAVL nodoActual = arbol.raiz;
+      
             while(band){
                 if((int)nodoActual.getDato() == comparador){
                     referencias = nodoActual.getDuplicados();
@@ -95,51 +115,43 @@ public class Arbol {
                     }
                 }
             }
-            break;
-            case 2:
-            while(band){
-                if((int)nodoActual.getDato() == comparador){
-                    referencias = nodoActual.getDuplicados();
-                    band=false;
-                } else{
-                    if((int)nodoActual.getDato() > comparador){
-                        nodoActual = (NodoAVL)nodoActual.getIzq();
-                    } else{
-                        nodoActual = (NodoAVL)nodoActual.getDer();
-                    }
-                }
-            }
-            break;
-            case 3:
-            while(band){
-                if((int)nodoActual.getDato() == comparador){
-                    referencias = nodoActual.getDuplicados();
-                    band=false;
-                } else{
-                    if((int)nodoActual.getDato() > comparador){
-                        nodoActual = (NodoAVL)nodoActual.getIzq();
-                    } else{
-                        nodoActual = (NodoAVL)nodoActual.getDer();
-                    }
-                }
-            }
-            break;
-        }
+            
+        
         return referencias;
     }
 
-    public static void busquedaDoble(int comparador,String comparador2, ArbolAVL arbol){
-        //Esta función puede filtrar el promedio y cualquier otro parametro (nombre o profesión)
-      
+    public static ListaSimple busquedaDoble(int comparador,String comparador2){
+        //Esta función puede filtrar el promedio y el otro parametro (profesión)
+        ListaSimple promedio = busquedaIndividual(comparador, ArbolCalificacion);
+        ListaSimple profesion = busquedaIndividual(comparador2, ArbolProfesion);
+        ListaSimple retorno = null;
+        int tamC = promedio.tamanio();
+        int tamp = profesion.tamanio();
+        //int tamanio= (promedio.tamanio()<profesion.tamanio())? promedio.tamanio():profesion.tamanio();
+
+        if(promedio.tamanio()<profesion.tamanio()){
+            for(int i=0; i<tamC;i++){
+                for(int j=0;j<tamp;j++){
+                
+                }
+
+
+            }
+        }
+
+        
+
+
+
+      return null;
       }
+    /*  Esta busqueda no tiene caso, basta con el nombre exacto
     public static void busquedaDoble(String comparador,String comparador2, ArbolAVL arbol){
         //Esta funcion solo puede filtrar nombre y promedio
       
-      }  
-    //REVISIÓN: ¿DEBERÍA HABER BÚSQUEDA DE 3?
-    public static void busquedaTriple(String comparador,String comparador2, int comparador3, ArbolAVL arbol){
-        //Esta funcion filtra por los tres parametros
-    }
+      }*/  
+    //REVISIÓN: ¿DEBERÍA HABER BÚSQUEDA DE 3? R== no
+
 
 
 
@@ -160,8 +172,8 @@ public class Arbol {
         //Ruta de Pat:
         //String nombreArchivo = "C:/Users/picar/Desktop/Software/Estructura de Datos/ProyectoFinal/ED_ProyectoFinal/EDatosNoLineales/src/Interfaz/Egresados.csv";
         
-        //Ruta de Isaac:
-        String nombreArchivo = "C:\\Users\\isaac\\Downloads\\ED_ProyectFinal\\ED_ProyectoFinal\\EDatosNoLineales\\src\\Interfaz\\Egresados.csv";
+        //Ruta de Daroz:
+        String nombreArchivo = "/home/daroz/Programas/Estrucutra/proyecto/ED_ProyectoFinal/EDatosNoLineales/src/Interfaz/Egresados.csv";
 
         try {
             obtenerInformacion(nombreArchivo);
@@ -172,7 +184,7 @@ public class Arbol {
         System.out.println("-Calificacione-");
         ArbolCalificacion.inOrden();
         System.out.println("Indices con 90: ");
-        busquedaIndividual(90, 3, ArbolCalificacion).imprimir();
+        busquedaIndividual(90, ArbolCalificacion).imprimir();
         //System.out.println(ArbolCalificacion.raiz.getDato());
         System.out.println("-Nombre-");
         //ArbolNombres.inOrden();
@@ -180,7 +192,19 @@ public class Arbol {
         System.out.println("-Profesion-");
         //ArbolProfesion.inOrden();
 
+        
 
+        System.out.println("");
+        System.out.println("");
+        //System.out.println(ArbolProfesion.raiz.getDato());
+
+        //System.out.println("Buscando la carrera: Arquitecto");
+       // busquedaIndividual("Arquitecto", ArbolProfesion).imprimir();
+       // System.out.println("");
+
+        System.out.println("Buscando el nombre: Jorge Antonio Zumárraga Novelo");
+        busquedaIndividual("Jorge Antonio Zumárraga Novelo", ArbolNombres).imprimir();
+        System.out.println("");
 
     }
     
