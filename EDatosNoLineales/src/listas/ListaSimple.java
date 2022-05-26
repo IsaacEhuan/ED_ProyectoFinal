@@ -75,31 +75,31 @@ public class ListaSimple extends Lista{
     }
     
     public void insertaOrdenado(int dato){
-    if (vacio())
-        insertaInicio(dato);
-    else{
-        if (inicio == ultimo)
-            if (dato < (Integer)inicio.getDato())
-                insertaInicio(dato);
-            else
-                insertaFinal(dato);
+        if (vacio())
+            insertaInicio(dato);
         else{
-            Nodo antes = null, despues = inicio;
-            while(despues!=null && dato > (Integer)despues.getDato()){
-                antes = despues;
-                despues = despues.getSiguiente();
-            }
-            if (antes==null)
-                insertaInicio(dato);
-            else
-                if (despues==null)
+            if (inicio == ultimo)
+                if (dato < (Integer)inicio.getDato())
+                    insertaInicio(dato);
+                else
                     insertaFinal(dato);
-                else{
-                    Nodo nuevo = new Nodo(dato,despues);
-                    antes.setSiguiente(nuevo);
-                }        
-        }
-    }                
+            else{
+                Nodo antes = null, despues = inicio;
+                while(despues!=null && dato > (Integer)despues.getDato()){
+                    antes = despues;
+                    despues = despues.getSiguiente();
+                }
+                if (antes==null)
+                    insertaInicio(dato);
+                else
+                    if (despues==null)
+                        insertaFinal(dato);
+                    else{
+                        Nodo nuevo = new Nodo(dato,despues);
+                        antes.setSiguiente(nuevo);
+                    }        
+            }
+        }                
     }
     
     public static void main(String[] args) {
