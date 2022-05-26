@@ -4,7 +4,7 @@
  */
 package abb;
 
-import java.util.ArrayList;
+import listas.ListaSimple;
 
 /**
  *
@@ -14,36 +14,34 @@ public class NodoBin {
     protected Object dato;
     protected NodoBin izq;
     protected NodoBin der;
-    protected ArrayList<Integer> duplicados;
+    protected ListaSimple duplicados;
 
     public NodoBin(Object dato, NodoBin izq, NodoBin der) {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
-        duplicados = new ArrayList<Integer>();
+        duplicados = new ListaSimple();
     }
 
     public NodoBin(Object dato){
        this(dato,null,null);
-       duplicados = new ArrayList<Integer>();
+       duplicados = new ListaSimple();
     }
     
     public NodoBin(){
         this(null);
-        duplicados = new ArrayList<Integer>();
+        duplicados = new ListaSimple();
     }
 
     public void add(int i){
-        duplicados.add(i);
+        duplicados.insertaFinal(i);
     }
-    public ArrayList<Integer> getDuplicados(){
+    public ListaSimple getDuplicados(){
         return duplicados;
     }
 
     public void printDuplicados(){
-        for(int i: duplicados){
-            System.out.print(i +" ");
-        }
+        duplicados.imprimir();
     }
     
     /**

@@ -1,7 +1,6 @@
 package Arboles;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+
 
 import archivos.LectorArchivo;
 import archivos.VerificadorArchivo;
@@ -12,19 +11,16 @@ public class Arbol {
     public static ArbolAVL ArbolProfesion;
     public static ArbolAVL ArbolCalificacion;
 
-    public static ArrayList<Egresado> listaEgresados;
+    public static Egresado[] listaEgresados;
 
 
-    public static void setArboles(Iterator<Egresado> listaEgresados){
-        //Saltar el primero, que es la raiz
-        listaEgresados.next();
-
-        while(listaEgresados.hasNext()){
-            Egresado actula = listaEgresados.next();
-            int index = actula.getIndex();
-            ArbolCalificacion.insertarInt(actula.calificacion, index);
-            ArbolNombres.insertarString(actula.nombre, index);
-            ArbolProfesion.insertarString(actula.profesion,index);
+    public static void setArboles(Egresado[] listaEgresados){
+        //Saltar el primero, que es la raiz 
+        for(int i=1; i< listaEgresados.length; i++){
+            Egresado actula = listaEgresados[i];
+            ArbolCalificacion.insertarInt(actula.calificacion, i);
+            ArbolNombres.insertarString(actula.nombre, i);
+            ArbolProfesion.insertarString(actula.profesion,i);
         }
     }
 
@@ -34,13 +30,24 @@ public class Arbol {
         VerificadorArchivo.verificarArchivoVacio(archivo);
         VerificadorArchivo.verificarNumeroColumnas(archivo, ',', 3);
         
-        ArrayList <String[]> lista =LectorArchivo.obtenerContenido(archivo, ',');
+        String[][] lista =LectorArchivo.obtenerContenido(archivo, ',');
+        int lineas = lista.length;
+        System.out.println(lineas);
+
 
         //Construir la lista
-        listaEgresados = new ArrayList<Egresado>();
+        listaEgresados = new Egresado[lineas];
+        /*
         for(String[] actual: lista){
             int calificacion = Integer.parseInt(actual[2]);
-            listaEgresados.add(new Egresado(actual[0], actual[1], calificacion));
+            listaEgresados[i] = new Egresado(actual[0], actual[1], calificacion);
+            System.out.println(listaEgresados[i]);
+        }
+        */
+        for(int i=0;i< lineas;i++){
+            String[] actual = lista[i];
+            int calificacion = Integer.parseInt(actual[2]);
+            listaEgresados[i] = new Egresado(actual[0], actual[1], calificacion);
         }
 
         /*
@@ -50,13 +57,13 @@ public class Arbol {
         */
 
         //Inicializar siempre asi los arboles, de otra forma la raiz siempre es nula
-        Egresado raiz = listaEgresados.get(0);
-        ArbolCalificacion = new ArbolAVL(raiz.calificacion, raiz.getIndex());
-        ArbolNombres = new ArbolAVL(raiz.nombre, raiz.getIndex());
-        ArbolProfesion = new ArbolAVL(raiz.profesion, raiz.getIndex());
+        Egresado raiz = listaEgresados[0];
+        ArbolCalificacion = new ArbolAVL(raiz.calificacion, 0);
+        ArbolNombres = new ArbolAVL(raiz.nombre, 0);
+        ArbolProfesion = new ArbolAVL(raiz.profesion, 0);
 
         //Setear Los arboles para el resto del arreglo
-        setArboles(listaEgresados.iterator());
+        setArboles(listaEgresados);
 
 
 

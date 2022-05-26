@@ -15,7 +15,7 @@ public class ArchivoImp {
     public ArchivoImp(String ruta){
         rutaArchivo=ruta;
     }
-    public String getRuta(){
+    public static String getRuta(){
         return rutaArchivo;
     }
 }

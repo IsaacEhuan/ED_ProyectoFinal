@@ -14,17 +14,20 @@ import java.util.Scanner;
  */
 public class LectorArchivo {
     
-    public static ArrayList<String[]> obtenerContenido(String ruta, char separador) throws FileNotFoundException{
-        ArrayList<String[]> retornar = new ArrayList<String[]>();
+    public static String[][] obtenerContenido(String ruta, char separador) throws FileNotFoundException{
+        int lineas = lineasArchivo(ruta);
+        String[][] retornar = new String[lineas][];
         
         File archivo = new File(ruta);
         Scanner  lector;
         lector = new Scanner(archivo);
         String[] separar;
+        int i =0;
         while(lector.hasNextLine()){
             String linea = lector.nextLine();
             separar = linea.split(String.valueOf(separador));
-            retornar.add(separar);
+            retornar[i] = separar;
+            i++;
         }
         lector.close(); 
         return retornar;
@@ -42,6 +45,20 @@ public class LectorArchivo {
         lector.close(); 
         return retornar;
         
+    }
+
+    public static int lineasArchivo(String ruta) throws FileNotFoundException{
+        File archivo = new File(ruta);
+        Scanner  lector;
+        lector = new Scanner(archivo);
+        int i=0;
+        while(lector.hasNextLine()){
+            lector.nextLine();
+            i++;
+        }
+        lector.close();
+        return i; 
+
     }
     
 }
