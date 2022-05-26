@@ -47,7 +47,7 @@ public class LectorArchivo {
         
     }
 
-    public static int lineasArchivo(String ruta) throws FileNotFoundException{
+    private static int lineasArchivo(String ruta) throws FileNotFoundException{
         File archivo = new File(ruta);
         Scanner  lector;
         lector = new Scanner(archivo);
