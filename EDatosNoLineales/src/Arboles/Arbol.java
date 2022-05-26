@@ -68,6 +68,33 @@ public class Arbol {
 
 
     }
+//-----------------------Funciones de busqueda-------------------------------------
+    public static void busquedaIndividual(String comparador, ArbolAVL arbol){
+      //Esta función puede filtrar tanto nombre como profesión
+    
+    }
+
+    public static void busquedaIndividual(int comparador, ArbolAVL arbol){
+        //Esta función puede filtrar el promedio
+      
+      }
+
+    public static void busquedaDoble(int comparador,String comparador2, ArbolAVL arbol){
+        //Esta función puede filtrar el promedio y cualquier otro parametro (nombre o profesión)
+      
+      }
+    public static void busquedaDoble(String comparador,String comparador2, ArbolAVL arbol){
+        //Esta funcion solo puede filtrar nombre y promedio
+      
+      }  
+    public static void busquedaTriple(String comparador,String comparador2, int comparador3, ArbolAVL arbol){
+        //Esta funcion filtra por los tres parametros
+    }
+
+
+
+
+//-------------------------------------------------------------------------------------    
 
     public static void main(String[] args) {
 
