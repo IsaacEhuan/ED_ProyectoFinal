@@ -75,6 +75,16 @@ public class NodoBin {
        if(der!=null)
            der.inOrden();
     }
+
+    public void ListaInOrden(ListaSimple cabezera){
+        if(izq!=null){
+            izq.ListaInOrden(cabezera);
+        }
+        cabezera.unirFinal(duplicados);
+        if(der!=null){
+            der.ListaInOrden(cabezera);
+        }
+    }
     
     /**
      * @param dato the dato to set

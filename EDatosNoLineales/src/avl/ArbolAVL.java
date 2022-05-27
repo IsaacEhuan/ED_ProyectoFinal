@@ -4,6 +4,7 @@
  */
 package avl;
 
+import listas.ListaSimple;
 
 /**
  *
@@ -29,7 +30,13 @@ public class ArbolAVL {
        if(raiz!=null)
            raiz.inOrden();
     }
-    
+    public ListaSimple ListaInOrden(){
+      ListaSimple cabezera = new ListaSimple();
+      raiz.ListaInOrden(cabezera);
+      return cabezera;
+    }
+
+
     public void preOrden(){
        if(raiz!=null)
            raiz.preOrden();
