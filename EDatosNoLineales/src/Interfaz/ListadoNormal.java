@@ -177,7 +177,7 @@ public class ListadoNormal extends javax.swing.JFrame {
                     }
 
                 }
-
+                modelo.moveRow(modelo.getRowCount()-1, modelo.getRowCount()-1, 0);
                 break;
             case "Profesion":
                 lista = Arbol.ArbolProfesion.ListaInOrden();
@@ -258,7 +258,7 @@ public class ListadoNormal extends javax.swing.JFrame {
                     }
 
                 }
-
+                modelo.moveRow(0, 0,modelo.getRowCount()-1);
                 break;
             case "Profesion":
                 lista = Arbol.ArbolProfesion.ListaInOrden();
