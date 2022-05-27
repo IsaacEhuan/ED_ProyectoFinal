@@ -16,6 +16,7 @@ import listas.*;
 
 /**
  *Ventana de Busqueda
+ * 
  * @author donco
  */
 public class Busqueda extends javax.swing.JFrame {
@@ -263,24 +264,6 @@ public class Busqueda extends javax.swing.JFrame {
                 try {
                 lista = Arbol.busquedaIndividual(campoNombre.getText(), Arbol.ArbolNombres);
                 nodo = lista.getInicio();
-                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
-                    try {
-                        if ((int) nodo.getDato() == i) {
-                            System.out.println(Arbol.listaEgresados[i]);
-                            String arreglo[] = new String[3];
-                            arreglo[0] = Arbol.listaEgresados[i].nombre;
-                            arreglo[1] = Arbol.listaEgresados[i].profesion;
-                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
-                            modelo.addRow(arreglo);
-                            nodo = nodo.getSiguiente();
-                            prueba++;
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Nombre incorrecto","Error",JOptionPane.ERROR_MESSAGE);
-
-                    }
-
-                }
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "Nombre incorrecto","Error",JOptionPane.ERROR_MESSAGE);
             }
@@ -290,23 +273,6 @@ public class Busqueda extends javax.swing.JFrame {
                 try {
                 lista = Arbol.busquedaIndividual(campoProfesion.getText(), Arbol.ArbolProfesion);
                 nodo = lista.getInicio();
-                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
-                    try {
-                        if ((int) nodo.getDato() == i) {
-                            System.out.println(Arbol.listaEgresados[i]);
-                            String arreglo[] = new String[3];
-                            arreglo[0] = Arbol.listaEgresados[i].nombre;
-                            arreglo[1] = Arbol.listaEgresados[i].profesion;
-                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
-                            modelo.addRow(arreglo);
-                            nodo = nodo.getSiguiente();
-                            prueba++;
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "La profesion no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                }
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "La profesion no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -318,23 +284,6 @@ public class Busqueda extends javax.swing.JFrame {
                 buscar = Integer.parseInt(campoPromedio.getText());//Parsear al tipo de dato de sus funciones
                 lista = Arbol.busquedaIndividual(buscar, Arbol.ArbolCalificacion);
                 nodo = lista.getInicio();
-                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
-                    try {
-                        if ((int) nodo.getDato() == i) {
-                            System.out.println(Arbol.listaEgresados[i]);
-                            String arreglo[] = new String[3];
-                            arreglo[0] = Arbol.listaEgresados[i].nombre;
-                            arreglo[1] = Arbol.listaEgresados[i].profesion;
-                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
-                            modelo.addRow(arreglo);
-                            nodo = nodo.getSiguiente();
-                            prueba++;
-                        }
-                    } catch (Exception e) {
-
-                    }
-
-                }
                 }catch(NullPointerException e){
                     JOptionPane.showMessageDialog(null, "El Promedio no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
                 }catch(Exception e){
@@ -346,24 +295,24 @@ public class Busqueda extends javax.swing.JFrame {
                 try {
                 lista = Arbol.busquedaDobleNombreProf(campoProfesion.getText(), campoNombre.getText());
                 nodo = lista.getInicio();
-                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
-                    try {
-                        if ((int) nodo.getDato() == i) {
-                            System.out.println(Arbol.listaEgresados[i]);
-                            String arreglo[] = new String[3];
-                            arreglo[0] = Arbol.listaEgresados[i].nombre;
-                            arreglo[1] = Arbol.listaEgresados[i].profesion;
-                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
-                            modelo.addRow(arreglo);
-                            nodo = nodo.getSiguiente();
-                            prueba++;
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Nombre o Profesion incorrecto","Error",JOptionPane.ERROR_MESSAGE);
-
-                    }
-
-                }
+//                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
+//                    try {
+//                        if ((int) nodo.getDato() == i) {
+//                            System.out.println(Arbol.listaEgresados[i]);
+//                            String arreglo[] = new String[3];
+//                            arreglo[0] = Arbol.listaEgresados[i].nombre;
+//                            arreglo[1] = Arbol.listaEgresados[i].profesion;
+//                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
+//                            modelo.addRow(arreglo);
+//                            nodo = nodo.getSiguiente();
+//                            prueba++;
+//                        }
+//                    } catch (Exception e) {
+//                        JOptionPane.showMessageDialog(null, "Nombre o Profesion incorrecto","Error",JOptionPane.ERROR_MESSAGE);
+//
+//                    }
+//
+//                }
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "Nombre o Profesion incorrecto","Error",JOptionPane.ERROR_MESSAGE);
             }
@@ -372,24 +321,6 @@ public class Busqueda extends javax.swing.JFrame {
                 try {
                 lista = Arbol.busquedaDobleNombre(Integer.parseInt(campoPromedio.getText()), campoNombre.getText());
                 nodo = lista.getInicio();
-                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
-                    try {
-                        if ((int) nodo.getDato() == i) {
-                            System.out.println(Arbol.listaEgresados[i]);
-                            String arreglo[] = new String[3];
-                            arreglo[0] = Arbol.listaEgresados[i].nombre;
-                            arreglo[1] = Arbol.listaEgresados[i].profesion;
-                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
-                            modelo.addRow(arreglo);
-                            nodo = nodo.getSiguiente();
-                            prueba++;
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Nombre o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
-
-                    }
-
-                }
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "Nombre o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
             }
@@ -400,29 +331,23 @@ public class Busqueda extends javax.swing.JFrame {
                 try {
                 lista = Arbol.busquedaDoble(Integer.parseInt(campoPromedio.getText()), campoProfesion.getText());
                 nodo = lista.getInicio();
-                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
-                    try {
-                        if ((int) nodo.getDato() == i) {
-                            System.out.println(Arbol.listaEgresados[i]);
-                            String arreglo[] = new String[3];
-                            arreglo[0] = Arbol.listaEgresados[i].nombre;
-                            arreglo[1] = Arbol.listaEgresados[i].profesion;
-                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
-                            modelo.addRow(arreglo);
-                            nodo = nodo.getSiguiente();
-                            prueba++;
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Profesion o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
-                    }
-
-                }
             } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "Profesion o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
             }
 
             break;
         }
+        nodo = lista.getInicio();
+            while(nodo!=null){
+               int index = (int)nodo.getDato();
+               String arreglo[] = new String[3];
+                    arreglo[0] = Arbol.listaEgresados[index].nombre;
+                    arreglo[1] = Arbol.listaEgresados[index].profesion;
+                    arreglo[2] = String.valueOf(Arbol.listaEgresados[index].calificacion);
+                    modelo.addRow(arreglo);
+                    nodo = nodo.getSiguiente();
+                }
+        
         jButton2.setEnabled(false);
         jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton2ActionPerformed
