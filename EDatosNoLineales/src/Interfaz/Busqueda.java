@@ -7,10 +7,15 @@ package Interfaz;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Arboles.Arbol;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import listas.*;
 
 /**
- *
+ *Ventana de Busqueda
  * @author donco
  */
 public class Busqueda extends javax.swing.JFrame {
@@ -31,7 +36,19 @@ public class Busqueda extends javax.swing.JFrame {
         modelo.addColumn("Promedio");
         this.jTable1.setModel(modelo);
         jButton2.setEnabled(false);
-
+        
+        Atras.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DatosTabla p = new DatosTabla();
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                p.setLocation(screenSize.width/2-p.getWidth()/2, screenSize.height/2-p.getHeight()/2);
+                    dispose();
+                    p.setVisible(true);
+                    
+            }
+        });
+        
     }
 
     /**
@@ -54,6 +71,7 @@ public class Busqueda extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        Atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,12 +103,15 @@ public class Busqueda extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        Atras.setText("Atras");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,12 +136,14 @@ public class Busqueda extends javax.swing.JFrame {
                                     .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                                     .addComponent(campoProfesion)
                                     .addComponent(campoPromedio))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Atras)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +171,9 @@ public class Busqueda extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Atras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,7 +230,21 @@ public class Busqueda extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void atrasAccion(){
+        final Busqueda esto = this;
+        Atras.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()== this){
+                    Principal p = new Principal();
+                    p.setVisible(true);
+                    esto.dispose();
+                }
+            }
+        });
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int buscar;
         int prueba = 0;
@@ -237,14 +276,16 @@ public class Busqueda extends javax.swing.JFrame {
                             prueba++;
                         }
                     } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Nombre incorrecto","Error",JOptionPane.ERROR_MESSAGE);
 
                     }
 
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Nombre incorrecto");
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Nombre incorrecto","Error",JOptionPane.ERROR_MESSAGE);
             }
             break;
+
             case "Profesion":
                 try {
                 lista = Arbol.busquedaIndividual(campoProfesion.getText(), Arbol.ArbolProfesion);
@@ -262,17 +303,18 @@ public class Busqueda extends javax.swing.JFrame {
                             prueba++;
                         }
                     } catch (Exception e) {
-
+                        JOptionPane.showMessageDialog(null, "La profesion no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Nombre incorrecto");
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "La profesion no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
             }
 
             break;
-            case "Promedio":
 
+            case "Promedio":
+                try{
                 buscar = Integer.parseInt(campoPromedio.getText());//Parsear al tipo de dato de sus funciones
                 lista = Arbol.busquedaIndividual(buscar, Arbol.ArbolCalificacion);
                 nodo = lista.getInicio();
@@ -293,6 +335,11 @@ public class Busqueda extends javax.swing.JFrame {
                     }
 
                 }
+                }catch(NullPointerException e){
+                    JOptionPane.showMessageDialog(null, "El Promedio no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Formato de promedio Incorrecto","Error", JOptionPane.ERROR_MESSAGE);
+                }
                 System.out.println(prueba);
                 break;
             case "Nombre/Profesion":
@@ -312,12 +359,13 @@ public class Busqueda extends javax.swing.JFrame {
                             prueba++;
                         }
                     } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Nombre o Profesion incorrecto","Error",JOptionPane.ERROR_MESSAGE);
 
                     }
 
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Nombre incorrecto");
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Nombre o Profesion incorrecto","Error",JOptionPane.ERROR_MESSAGE);
             }
                 break;
             case "Nombre/Promedio":
@@ -337,12 +385,13 @@ public class Busqueda extends javax.swing.JFrame {
                             prueba++;
                         }
                     } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Nombre o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
 
                     }
 
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Nombre incorrecto");
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Nombre o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
             }
 
             break;
@@ -364,12 +413,12 @@ public class Busqueda extends javax.swing.JFrame {
                             prueba++;
                         }
                     } catch (Exception e) {
-
+                        JOptionPane.showMessageDialog(null, "Profesion o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Nombre incorrecto");
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Profesion o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
             }
 
             break;
@@ -407,6 +456,7 @@ public class Busqueda extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Busqueda().setVisible(true);
             }
@@ -414,6 +464,7 @@ public class Busqueda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Atras;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoProfesion;
     private javax.swing.JTextField campoPromedio;

@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\picar\\Desktop\\flatlaf-2.2.jar",
+        "c:\\Users\\picar\\Desktop\\flatlaf-intellij-themes-2.2.jar"
+    ]
+}

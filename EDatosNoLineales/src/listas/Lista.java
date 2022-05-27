@@ -6,7 +6,7 @@
 package listas;
 
 /**
- *
+ * Clase abstracta para generar diferentes tipos de lista
  * @author jorge.reyes
  */
 public abstract class Lista {
@@ -14,6 +14,9 @@ public abstract class Lista {
     protected Nodo ultimo;
     protected String nombre;
     
+    /**
+     * Clase abstracta para la implementacion de diferentes tipos de lista
+     */
     public Lista(){
         this("lista");
     }
@@ -70,10 +73,18 @@ public abstract class Lista {
         this.nombre = nombre;
     }
     
+    /**
+     * Comprueba si la lista está vacia
+     * @return inicio == null
+     */
     public boolean vacio(){
         return inicio==null;
     }
 
+    /**
+     * Recorre la lista para encontrar el tamaño de la misma
+     * @return  tamaño de la lista
+     */
     public int tamanio(){
         Nodo actual = inicio;
         int i=0;

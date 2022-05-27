@@ -7,14 +7,39 @@ import archivos.VerificadorArchivo;
 import avl.*;
 import listas.*;
 
+/**
+ * Clase en la cual se encuentran los tres Arboles AVL de manera publica, asi como el Arreglode los Egresados
+ * @author David Pat
+ */
 public class Arbol {
+
+    /**
+     * ArbolAVL que contiene Cadenas con los nombres de los Egresados en cada Nodo. Un solo nombre por nodo,  estas no se repiten.
+     * Tiene una lista con todos los nombres repetidos, al no haber nombres repetidos esta lista solo tiene un elemento
+     */
     public static ArbolAVL ArbolNombres;
+
+    /**
+     *ArbolAVL que contiene las Cadenas con las Profesiones de los Egresados en cada Nodo. Una sola profesión por nodo, estas no se repiten.
+     *Cada nodo contiene una lista con todos los indices en donde las profesiones son repetidas.
+     */
     public static ArbolAVL ArbolProfesion;
+
+    /**
+     *ArbolAVL que contiene Enteros con las Calificaciones de los Egresados en cada Nodo. Una sola calificación por nodo, estas no se repiten.
+     * Cada nodo contiene una lista con todos los indices en donde las Calificacion es repetida.
+     */
     public static ArbolAVL ArbolCalificacion;
 
+    /**
+     *Arreglo con todos los egresados
+     */
     public static Egresado[] listaEgresados;
 
-
+    /**
+     * Inicializa los tres Arboles AVL para los Nombre, Profesiones y Calificaciones
+     * @param listaEgresados lista estatica de la clase donde se encuentran los Egresados
+     */
     public static void setArboles(Egresado[] listaEgresados){
         //Saltar el primero, que es la raiz 
         for(int i=1; i< listaEgresados.length; i++){
@@ -26,6 +51,11 @@ public class Arbol {
         }
     }
 
+    /**
+     *Inicializa el arreglo de Egresados, asi como construye los tres Arboles AVL necesarios
+     * @param archivo Ruta del archivo para obtener la información 
+     * @throws Exception Arroja el mensaje verificando el formato del archivo
+     */
     public static void obtenerInformacion(String archivo) throws Exception{
         //Obtener Contenido
         VerificadorArchivo.verificarExistenciaArchivo(archivo);
@@ -58,7 +88,14 @@ public class Arbol {
 
     }
 //-----------------------Funciones de busqueda-------------------------------------
-    public static ListaSimple busquedaIndividual(String comparador, ArbolAVL arbol){
+
+    /**
+     *Busqueda de una cadena entre los nodos de un Arbol AVL, regresando la lista de sus repeticiones
+     * @param comparador cadea a encontrar entre los datos de los Nodos del arbol
+     * @param arbol ArbolAVL en el cula buscar
+     * @return Lista simple que contiene solo los indices de ListaEgresados, ordenada de manera ascendente
+     */
+    public static ListaSimple busquedaIndividual(String comparador, ArbolAVL arbol) {
        ListaSimple referencias = new ListaSimple();
         boolean band=true;
         NodoAVL nodoActual = arbol.raiz;
@@ -84,7 +121,12 @@ public class Arbol {
     
     }
 
-
+    /**
+     *Busqueda de un entero entre los nodos de un Arbol AVL, regresando la lista de sus repeticiones
+     * @param comparador entero a encontrar entre los datos de los Nodos del arbol
+     * @param arbol ArbolAVL en el cula buscar
+     * @return Lista simple que contiene solo los indices de ListaEgresados, ordenada de manera ascendente
+     */
     public static ListaSimple busquedaIndividual(int comparador, ArbolAVL arbol){
         ListaSimple referencias = new ListaSimple();
         boolean band=true;
@@ -106,6 +148,13 @@ public class Arbol {
         
         return referencias;
     }
+
+    /**
+     * Busqueda avanzada en la cual se obtienen todos los indices que intersectan las condiciones ingresadas  
+     * @param comparador Entero a bucar en el Arbol de Calificaciones
+     * @param comparador2 Cadena a buscar en el Arbol de Nombres
+     * @return Lista simple de los indices de ListaEgresados coincidentes con las condiciones de los dos parametros
+     */
     public static ListaSimple busquedaDobleNombre(int comparador,String comparador2){
         //Esta función puede filtrar el promedio y el otro parametro (nombre)
         ListaSimple promedio = busquedaIndividual(comparador, ArbolCalificacion);
@@ -130,6 +179,13 @@ public class Arbol {
         }
         return retorno;
       }
+
+    /**
+     * Busqueda avanzada en la cual se obtienen todos los indices que intersectan las condiciones ingresadas  
+     * @param comparador Cadena a bucar en el Arbol de Profesiones
+     * @param comparador2 Cadena a buscar en el Arbol de Nombres
+     * @return Lista simple de los indices de ListaEgresados coincidentes con las condiciones de los dos parametros
+     */
     public static ListaSimple busquedaDobleNombreProf(String comparador,String comparador2){
         //Esta función puede filtrar el nombre y el otro parametro (profesión)
         ListaSimple profesion = busquedaIndividual(comparador, ArbolProfesion);
@@ -155,6 +211,12 @@ public class Arbol {
         return retorno;
       }
     
+    /**
+     * Busqueda avanzada en la cual se obtienen todos los indices que intersectan las condiciones ingresadas  
+     * @param comparador Entero a bucar en el Arbol de Calificaciones
+     * @param comparador2 Cadena a bucar en el Arbol de Profesiones
+     * @return Lista simple de los indices de ListaEgresados coincidentes con las condiciones de los dos parametros
+     */
     public static ListaSimple busquedaDoble(int comparador,String comparador2){
         //Esta función puede filtrar el promedio y el otro parametro (profesión)
         ListaSimple promedio = busquedaIndividual(comparador, ArbolCalificacion);
@@ -186,6 +248,11 @@ public class Arbol {
       }*/  
 
 //-------------------------------------------------------------------------------------    
+
+    /**
+     * Demostración de las funcionalidades de la clase
+     * @param args
+     */
 
     public static void main(String[] args) {
         

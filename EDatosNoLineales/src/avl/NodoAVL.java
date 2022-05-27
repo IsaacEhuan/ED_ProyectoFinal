@@ -7,7 +7,7 @@ package avl;
 import abb.NodoBin;
 
 /**
- *
+ * Nodos del ArbolAVL
  * @author jorge.reyes
  */
 public class NodoAVL extends NodoBin{
@@ -37,6 +37,10 @@ public class NodoAVL extends NodoBin{
            Math.max(altura((NodoAVL)a.getIzq()), altura((NodoAVL)a.getDer()));
     }
     
+    /**
+     *Impresion inOrden en consola
+     */
+    @Override
     public void inOrden(){
     if(izq!=null)
            ((NodoAVL)izq).inOrden();
@@ -48,6 +52,10 @@ public class NodoAVL extends NodoBin{
            ((NodoAVL)der).inOrden();
     }
     
+    /**
+     *Impresion preOrden en consola
+     */
+    @Override
     public void preOrden(){
         System.out.print(dato + "| FE :" + FE +" {");//Raiz
         printDuplicados();
@@ -59,6 +67,10 @@ public class NodoAVL extends NodoBin{
            ((NodoAVL)der).preOrden();
     }
     
+    /**
+     *Impresion posOrden en consola
+     */
+    @Override
     public void posOrden(){    
         if(izq!=null)
            ((NodoAVL)izq).posOrden();     

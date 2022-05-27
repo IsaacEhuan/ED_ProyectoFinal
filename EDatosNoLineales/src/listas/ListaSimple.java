@@ -6,11 +6,15 @@
 package listas;
 
 /**
- *
+ *Lista simple con solo un enlace al siguiente elemento
  * @author jorge.reyes
  */
 public class ListaSimple extends Lista{
 
+    /**
+     * Insertar un dato como primer elemento de la lista
+     * @param dato dato del nodo
+     */
     @Override
     public void insertaInicio(Object dato) {
         if (vacio()){

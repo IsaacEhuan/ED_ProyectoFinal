@@ -11,15 +11,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 import archivos.VerificadorArchivo;
-//CLASE EN LA QUE SE IMPORTA EL ARCHIVO, SE CHECAN LAS COLUMNAS, Y SOLO SE ACEPTAN 
-//ARCHIVOS CON EXTENSION .csv
+//
+//
 /**
- *
+ *CLASE EN LA QUE SE IMPORTA EL ARCHIVO, SE CHECAN LAS COLUMNAS, Y SOLO SE ACEPTAN ARCHIVOS CON EXTENSION .csv
  * @author donco
  */
 public class Principal extends javax.swing.JFrame {
 
     /**
+     * 
      * Creates new form Principal
      */
     public Principal() {
