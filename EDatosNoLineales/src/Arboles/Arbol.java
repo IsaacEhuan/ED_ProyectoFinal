@@ -106,7 +106,55 @@ public class Arbol {
         
         return referencias;
     }
+    public static ListaSimple busquedaDobleNombre(int comparador,String comparador2){
+        //Esta función puede filtrar el promedio y el otro parametro (nombre)
+        ListaSimple promedio = busquedaIndividual(comparador, ArbolCalificacion);
+        ListaSimple nombre = busquedaIndividual(comparador2, ArbolNombres);
+        ListaSimple retorno = new ListaSimple();
+        Nodo actualNombre = nombre.getInicio();
+        Nodo actualPromedio = promedio.getInicio();
 
+        while (actualNombre != null && actualPromedio != null){
+            if((int)actualNombre.getDato() == (int)actualPromedio.getDato()){
+                retorno.insertaFinal(actualPromedio.getDato());
+                actualNombre = actualNombre.getSiguiente();
+                actualPromedio = actualPromedio.getSiguiente();
+            } else{
+                if((int)actualNombre.getDato() < (int)actualPromedio.getDato()){
+                    actualNombre = actualNombre.getSiguiente();
+                } else{
+                    actualPromedio = actualPromedio.getSiguiente(); 
+                }
+            }
+            System.out.println("");
+        }
+        return retorno;
+      }
+    public static ListaSimple busquedaDobleNombreProf(String comparador,String comparador2){
+        //Esta función puede filtrar el nombre y el otro parametro (profesión)
+        ListaSimple profesion = busquedaIndividual(comparador, ArbolProfesion);
+        ListaSimple nombre = busquedaIndividual(comparador2, ArbolNombres);
+        ListaSimple retorno = new ListaSimple();
+        Nodo actualNombre = nombre.getInicio();
+        Nodo actualProfesion = profesion.getInicio();
+
+        while (actualNombre != null && actualProfesion != null){
+            if((int)actualNombre.getDato() == (int)actualProfesion.getDato()){
+                retorno.insertaFinal(actualProfesion.getDato());
+                actualNombre = actualNombre.getSiguiente();
+                actualProfesion = actualProfesion.getSiguiente();
+            } else{
+                if((int)actualNombre.getDato() < (int)actualProfesion.getDato()){
+                    actualNombre = actualNombre.getSiguiente();
+                } else{
+                    actualProfesion = actualProfesion.getSiguiente(); 
+                }
+            }
+            System.out.println("");
+        }
+        return retorno;
+      }
+    
     public static ListaSimple busquedaDoble(int comparador,String comparador2){
         //Esta función puede filtrar el promedio y el otro parametro (profesión)
         ListaSimple promedio = busquedaIndividual(comparador, ArbolCalificacion);

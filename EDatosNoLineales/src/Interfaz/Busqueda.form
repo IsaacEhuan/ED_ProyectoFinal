@@ -35,8 +35,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" pref="109" max="32767" attributes="0"/>
                                   <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -45,22 +44,9 @@
                                   <Component id="campoNombre" pref="190" max="32767" attributes="0"/>
                                   <Component id="campoProfesion" max="32767" attributes="0"/>
                                   <Component id="campoPromedio" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="mayorCheck" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="menorCheck" min="-2" pref="82" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="igualCheck" min="-2" pref="82" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace pref="78" max="32767" attributes="0"/>
-                                      <Component id="jButton2" min="-2" pref="116" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace pref="78" max="32767" attributes="0"/>
+                              <Component id="jButton2" min="-2" pref="116" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -104,16 +90,9 @@
                       <Component id="jButton2" min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="mayorCheck" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="menorCheck" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="igualCheck" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="258" max="-2" attributes="0"/>
-              <EmptySpace pref="102" max="32767" attributes="0"/>
+              <EmptySpace pref="110" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -122,14 +101,13 @@
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
+          <StringArray count="6">
             <StringItem index="0" value="Nombre"/>
             <StringItem index="1" value="Profesion"/>
             <StringItem index="2" value="Promedio"/>
             <StringItem index="3" value="Nombre/Profesion"/>
             <StringItem index="4" value="Nombre/Promedio"/>
-            <StringItem index="5" value="Profesion/Nombre"/>
-            <StringItem index="6" value="Profesion/Promedio"/>
+            <StringItem index="5" value="Profesion/Promedio"/>
           </StringArray>
         </Property>
       </Properties>
@@ -164,36 +142,7 @@
         <Property name="text" type="java.lang.String" value="Promedio a buscar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Criterios de promedio"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="campoPromedio">
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="mayorCheck">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Mayor que"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mayorCheckActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="menorCheck">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Menor que"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menorCheckActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="igualCheck">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Igual a"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="igualCheckActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
