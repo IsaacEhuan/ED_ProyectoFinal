@@ -33,6 +33,15 @@ public class ListaSimple extends Lista{
         }
     }
 
+    public void unirFinal(ListaSimple listaFinal){
+        Nodo actual = listaFinal.inicio;
+        while(actual!= null){
+            insertaFinal(actual.dato);
+            actual = actual.siguiente;
+        }
+
+    }
+
     @Override
     public Object eliminaInicio() {
     Object eliminado = null;

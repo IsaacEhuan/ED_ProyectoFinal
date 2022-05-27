@@ -157,15 +157,18 @@ public class Arbol {
         }
 
         System.out.println("-Calificacione-");
+        ArbolCalificacion.ListaInOrden().imprimir();
+        System.out.println();
         ArbolCalificacion.inOrden();
         System.out.println("Indices con 90: ");
-        busquedaIndividual(90, ArbolCalificacion).imprimir();
+        //busquedaIndividual(90, ArbolCalificacion).imprimir();
         //System.out.println(ArbolCalificacion.raiz.getDato());
         System.out.println("-Nombre-");
-        //ArbolNombres.inOrden();
+        ArbolNombres.ListaInOrden().imprimir();
+        ArbolNombres.inOrden();
 
         System.out.println("-Profesion-");
-        ArbolProfesion.inOrden();
+        //ArbolProfesion.inOrden();
 
         
 
