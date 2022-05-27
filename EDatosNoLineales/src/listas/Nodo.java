@@ -6,7 +6,7 @@
 package listas;
 
 /**
- *
+ * Nodo simple de las Listas
  * @author jorge.reyes
  */
 public class Nodo {

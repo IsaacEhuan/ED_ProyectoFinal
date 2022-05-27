@@ -7,13 +7,29 @@ package abb;
 import listas.ListaSimple;
 
 /**
- *
+ *Nodo que tiene un dato izquierdo y uno derecho
  * @author jorge.reyes
  */
 public class NodoBin {
+
+    /**
+     *Dato del nodo
+     */
     protected Object dato;
+
+    /**
+     *Nodo izquierdo de este nodo
+     */
     protected NodoBin izq;
+
+    /**
+     *Nodo derecho de este nodo
+     */
     protected NodoBin der;
+
+    /**
+     *Lista simple con los indices de un estructura de datos
+     */
     protected ListaSimple duplicados;
 
     public NodoBin(Object dato, NodoBin izq, NodoBin der) {
@@ -36,10 +52,18 @@ public class NodoBin {
     public void add(int i){
         duplicados.insertaFinal(i);
     }
+
+    /**
+     * Lista simple con los indices de un estructura de datos en donde se encuentra exactamente el mismo dato
+     * @return Lista simple con duplicados
+     */
     public ListaSimple getDuplicados(){
         return duplicados;
     }
 
+    /**
+     * Imprime en consola la lista de duplicados
+     */
     public void printDuplicados(){
         duplicados.imprimir();
     }
@@ -59,6 +83,9 @@ public class NodoBin {
        System.out.println(dato);//Raiz
     }
     
+    /**
+     * impresion en consola preOrden
+     */
     public void preOrden(){
     System.out.println(dato);//Raiz    
     if(izq!=null)
@@ -68,6 +95,9 @@ public class NodoBin {
        
     }
     
+    /**
+     *Impresion en consola InOrden
+     */
     public void inOrden(){ //IRD
        if(izq!=null)
            izq.inOrden();
@@ -76,6 +106,10 @@ public class NodoBin {
            der.inOrden();
     }
 
+    /**
+     *Funcion que retorna todos los indices InOrden del Arbol que tiene como raiz este NodoBin  
+     * @param cabezera Referencia de la lista simple en donde se quiere obtener el resultado
+     */
     public void ListaInOrden(ListaSimple cabezera){
         if(izq!=null){
             izq.ListaInOrden(cabezera);

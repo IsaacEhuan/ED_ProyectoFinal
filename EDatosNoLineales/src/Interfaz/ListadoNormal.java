@@ -6,9 +6,13 @@ package Interfaz;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Arboles.Arbol;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import listas.*;
 
 /**
- *
+ *Ventana en donde se muestra la lista ordenada de diferentes formas
  * @author donco
  */
 public class ListadoNormal extends javax.swing.JFrame {
@@ -17,14 +21,26 @@ public class ListadoNormal extends javax.swing.JFrame {
      * Creates new form ListadoNormal
      */
     DefaultTableModel modelo;
+
     public ListadoNormal() {
         initComponents();
-        modelo=new DefaultTableModel();
+        modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Profesion");
         modelo.addColumn("Promedio");
         this.jTable1.setModel(modelo);
-        
+        Atras.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DatosTabla p = new DatosTabla();
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                p.setLocation(screenSize.width/2-p.getWidth()/2, screenSize.height/2-p.getHeight()/2);
+                    dispose();
+                    p.setVisible(true);
+                    
+            }
+        });
+
     }
 
     /**
@@ -41,9 +57,10 @@ public class ListadoNormal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        Atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Profesion", "Promedio" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +89,15 @@ public class ListadoNormal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton2.setText("Confirmar (al revés)");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        Atras.setText("Atras");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,19 +106,22 @@ public class ListadoNormal extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 38, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(79, 79, 79)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(66, 66, 66))))))
+                                .addGap(50, 50, 50)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(38, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Atras)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,12 +129,15 @@ public class ListadoNormal extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Atras)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,21 +149,170 @@ public class ListadoNormal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Ingresar codigo para agregar los egresados por el orden establecido
-        switch(jComboBox1.getSelectedItem().toString()){
+        ListaSimple lista = new ListaSimple();
+        Nodo nodo = new Nodo();
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Profesion");
+        modelo.addColumn("Promedio");
+        this.jTable1.setModel(modelo);
+        switch (jComboBox1.getSelectedItem().toString()) {
             case "Nombre":
-                JOptionPane.showMessageDialog(null, "Nombre");
+                lista = Arbol.ArbolNombres.ListaInOrden();
+                nodo = lista.getInicio();
+                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
+                    try {
+                        while (nodo != null) {
+
+                            String arreglo[] = new String[3];
+                            arreglo[0] = Arbol.listaEgresados[(int) nodo.getDato()].nombre;
+                            arreglo[1] = Arbol.listaEgresados[(int) nodo.getDato()].profesion;
+                            arreglo[2] = String.valueOf(Arbol.listaEgresados[(int) nodo.getDato()].calificacion);
+                            modelo.addRow(arreglo);
+                            nodo = nodo.getSiguiente();
+                        }
+
+                    } catch (Exception e) {
+
+                    }
+
+                }
+
                 break;
             case "Profesion":
-                JOptionPane.showMessageDialog(null, "Profesion");
+                lista = Arbol.ArbolProfesion.ListaInOrden();
+
+                nodo = lista.getInicio();
+                try {
+                    while (nodo != null) {
+
+                        String arreglo[] = new String[3];
+                        arreglo[0] = Arbol.listaEgresados[(int) nodo.getDato()].nombre;
+                        arreglo[1] = Arbol.listaEgresados[(int) nodo.getDato()].profesion;
+                        arreglo[2] = String.valueOf(Arbol.listaEgresados[(int) nodo.getDato()].calificacion);
+                        modelo.addRow(arreglo);
+                        nodo = nodo.getSiguiente();
+                    }
+
+                } catch (Exception e) {
+
+                }
+
                 break;
             case "Promedio":
-                JOptionPane.showMessageDialog(null, "Promedio");
+                lista = Arbol.ArbolCalificacion.ListaInOrden();
+                nodo = lista.getInicio();
+                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
+                    try {
+                        while (nodo != null) {
+
+                            String arreglo[] = new String[3];
+                            arreglo[0] = Arbol.listaEgresados[(int) nodo.getDato()].nombre;
+                            arreglo[1] = Arbol.listaEgresados[(int) nodo.getDato()].profesion;
+                            arreglo[2] = String.valueOf(Arbol.listaEgresados[(int) nodo.getDato()].calificacion);
+                            modelo.addRow(arreglo);
+                            nodo = nodo.getSiguiente();
+                        }
+
+                    } catch (Exception e) {
+
+                    }
+
+                }
+
                 break;
         }
         jButton1.setEnabled(false);
         jButton1.setEnabled(true);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ListaSimple lista = new ListaSimple();
+        Nodo nodo = new Nodo();
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Profesion");
+        modelo.addColumn("Promedio");
+        this.jTable1.setModel(modelo);
+        switch (jComboBox1.getSelectedItem().toString()) {
+            case "Nombre":
+                lista = Arbol.ArbolNombres.ListaInOrden();
+                nodo = lista.getInicio();
+                int[] reves3 = new int[lista.tamanio()];
+                for (int i = 0; i < lista.tamanio(); i++) {
+                    reves3[i] = (int) nodo.getDato();
+                    nodo = nodo.getSiguiente();
+                }
+                for (int i = lista.tamanio() - 1; i >= 0; i--) {
+                    try {
+
+                        String arreglo[] = new String[3];
+                        arreglo[0] = Arbol.listaEgresados[reves3[i]].nombre;
+                        arreglo[1] = Arbol.listaEgresados[reves3[i]].profesion;
+                        arreglo[2] = String.valueOf(Arbol.listaEgresados[reves3[i]].calificacion);
+                        modelo.addRow(arreglo);
+
+                    } catch (Exception e) {
+
+                    }
+
+                }
+
+                break;
+            case "Profesion":
+                lista = Arbol.ArbolProfesion.ListaInOrden();
+
+                nodo = lista.getInicio();
+                int[] reves2 = new int[lista.tamanio()];
+                for (int i = 0; i < lista.tamanio(); i++) {
+                    reves2[i] = (int) nodo.getDato();
+                    nodo = nodo.getSiguiente();
+                }
+                for (int i = lista.tamanio() - 1; i >= 0; i--) {
+                    try {
+
+                        String arreglo[] = new String[3];
+                        arreglo[0] = Arbol.listaEgresados[reves2[i]].nombre;
+                        arreglo[1] = Arbol.listaEgresados[reves2[i]].profesion;
+                        arreglo[2] = String.valueOf(Arbol.listaEgresados[reves2[i]].calificacion);
+                        modelo.addRow(arreglo);
+
+                    } catch (Exception e) {
+
+                    }
+
+                }
+
+                break;
+            case "Promedio":
+                lista = Arbol.ArbolCalificacion.ListaInOrden();
+                nodo = lista.getInicio();
+                int[] reves = new int[lista.tamanio()];
+                for (int i = 0; i < lista.tamanio(); i++) {
+                    reves[i] = (int) nodo.getDato();
+                    nodo = nodo.getSiguiente();
+                }
+                for (int i = lista.tamanio() - 1; i >= 0; i--) {
+                    try {
+
+                        String arreglo[] = new String[3];
+                        arreglo[0] = Arbol.listaEgresados[reves[i]].nombre;
+                        arreglo[1] = Arbol.listaEgresados[reves[i]].profesion;
+                        arreglo[2] = String.valueOf(Arbol.listaEgresados[reves[i]].calificacion);
+                        modelo.addRow(arreglo);
+
+                    } catch (Exception e) {
+
+                    }
+
+                }
+
+                break;
+        }
+        jButton2.setEnabled(false);
+        jButton2.setEnabled(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,7 +350,9 @@ public class ListadoNormal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Atras;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

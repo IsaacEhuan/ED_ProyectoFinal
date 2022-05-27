@@ -7,11 +7,15 @@ package avl;
 import listas.ListaSimple;
 
 /**
- *
+ * Arbol con NodosAVL. No hay dos nodos con un dato igual
  * @author jorge.reyes
  */
 public class ArbolAVL {
-  public NodoAVL raiz;
+
+    /**
+     *Nodo raiz del arbol
+     */
+    public NodoAVL raiz;
     
     public ArbolAVL(){
       raiz = null;
@@ -30,6 +34,11 @@ public class ArbolAVL {
        if(raiz!=null)
            raiz.inOrden();
     }
+
+    /**
+     *
+     * @return Lista simple con los indices inOrden de todas las listas de duplicados de los nodos 
+     */
     public ListaSimple ListaInOrden(){
       ListaSimple cabezera = new ListaSimple();
       raiz.ListaInOrden(cabezera);
@@ -52,11 +61,22 @@ public class ArbolAVL {
   }
 
   //Insertar NUEVOS
+
+    /**
+     *Añade una cadena al arbol de forma facil. Solo añadir cadenas luego de haber usado este metodo.
+     * @param s Cadena a insertar en el arbol
+     * @param index Posición en la estrucura de datos correspondiente
+     */
   public void insertarString(String s, int index){
     insertarOrdenadoString(raiz, s, index);
   }
 
-  public void insertarInt(int i, int index){
+    /**
+     *Añade un entero al arbol de forma facil. Solo añadir enteros luego de haber usado este metodo.
+     * @param i entero a insertar en el arbol
+     * @param index Posición en la estrucura de datos correspondiente
+     */
+    public void insertarInt(int i, int index){
     insertarOrdenadoEntero(raiz, i, index);
   }
   //.

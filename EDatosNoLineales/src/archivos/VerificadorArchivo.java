@@ -11,11 +11,16 @@ import java.util.Scanner;
 
 
 /**
- *
- * @author A17003603
+ * Verifica el formato de archivos de texto
+ * @author David Pat
  */
 public class VerificadorArchivo {
     
+    /**
+     * Verifica la existencia de un archivo
+     * @param ruta Cadena de la dirección del archivo
+     * @throws Exception El archivo no existe
+     */
     public static void verificarExistenciaArchivo(String ruta)throws Exception{
         String rutaAbsoluta = ruta;
         File archivo = new File(rutaAbsoluta);
@@ -25,6 +30,13 @@ public class VerificadorArchivo {
         }
     }
     
+    /**
+     * Verifica el numero de columnas que contiene un archivo de texto
+     * @param ruta Cadena de la dirección del archivo
+     * @param separador Carcter por el cual separar cada fila del archivo
+     * @param columnas numero de columnas deseadas que contenga
+     * @throws Exception Numero de columnas no esperado
+     */
     public static void verificarNumeroColumnas(String ruta,char separador, int columnas) throws Exception{
         File archivo = new File(ruta);
         Scanner  lector;
@@ -43,6 +55,11 @@ public class VerificadorArchivo {
         lector.close(); 
     }
     
+    /**
+     * Verifica si un archivo de texto está o no vacio
+     * @param ruta Cadena de la dirección del archivo
+     * @throws Exception El archivo está vacio
+     */
     public static void verificarArchivoVacio(String ruta) throws Exception{
         File archivo = new File(ruta);
         Scanner  lector;

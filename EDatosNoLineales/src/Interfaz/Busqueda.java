@@ -6,9 +6,17 @@ package Interfaz;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Arboles.Arbol;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import listas.*;
 
 /**
- *
+ *Ventana de Busqueda
+ * 
  * @author donco
  */
 public class Busqueda extends javax.swing.JFrame {
@@ -17,17 +25,30 @@ public class Busqueda extends javax.swing.JFrame {
      * Creates new form Busqueda
      */
     DefaultTableModel modelo;
+
     public Busqueda() {
         initComponents();
         campoNombre.setEnabled(false);
         campoProfesion.setEnabled(false);
         campoPromedio.setEnabled(false);
-        modelo=new DefaultTableModel();
+        modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Profesion");
         modelo.addColumn("Promedio");
         this.jTable1.setModel(modelo);
         jButton2.setEnabled(false);
+        
+        Atras.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DatosTabla p = new DatosTabla();
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                p.setLocation(screenSize.width/2-p.getWidth()/2, screenSize.height/2-p.getHeight()/2);
+                    dispose();
+                    p.setVisible(true);
+                    
+            }
+        });
         
     }
 
@@ -47,18 +68,15 @@ public class Busqueda extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         campoProfesion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         campoPromedio = new javax.swing.JTextField();
-        mayorCheck = new javax.swing.JCheckBox();
-        menorCheck = new javax.swing.JCheckBox();
-        igualCheck = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        Atras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Profesion", "Promedio", "Nombre/Profesion", "Nombre/Promedio", "Profesion/Nombre", "Profesion/Promedio" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Profesion", "Promedio", "Nombre/Profesion", "Nombre/Promedio", "Profesion/Promedio" }));
 
         jButton1.setText("Confirmar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,29 +91,6 @@ public class Busqueda extends javax.swing.JFrame {
 
         jLabel3.setText("Promedio a buscar");
 
-        jLabel4.setText("Criterios de promedio");
-
-        mayorCheck.setText("Mayor que");
-        mayorCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mayorCheckActionPerformed(evt);
-            }
-        });
-
-        menorCheck.setText("Menor que");
-        menorCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menorCheckActionPerformed(evt);
-            }
-        });
-
-        igualCheck.setText("Igual a");
-        igualCheck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                igualCheckActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -109,12 +104,15 @@ public class Busqueda extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        Atras.setText("Atras");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,30 +129,22 @@ public class Busqueda extends javax.swing.JFrame {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                                     .addComponent(campoProfesion)
-                                    .addComponent(campoPromedio)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(mayorCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(menorCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(igualCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(campoPromedio))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Atras)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,30 +170,20 @@ public class Busqueda extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(mayorCheck)
-                    .addComponent(menorCheck)
-                    .addComponent(igualCheck))
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Atras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mayorCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mayorCheckActionPerformed
-        menorCheck.setSelected(false);
-        igualCheck.setSelected(false);
-        
-    }//GEN-LAST:event_mayorCheckActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //
         jButton2.setEnabled(true);
-        switch(jComboBox1.getSelectedItem().toString()){
+        switch (jComboBox1.getSelectedItem().toString()) {
             case "Nombre":
                 JOptionPane.showMessageDialog(null, "Nombre");
                 campoNombre.setEnabled(true);
@@ -233,7 +213,7 @@ public class Busqueda extends javax.swing.JFrame {
                 campoNombre.setEnabled(true);
                 campoProfesion.setEnabled(false);
                 campoPromedio.setEnabled(true);
-                
+
                 break;
             case "Profesion/Nombre":
                 JOptionPane.showMessageDialog(null, "Profesion/Nombre");
@@ -251,66 +231,126 @@ public class Busqueda extends javax.swing.JFrame {
         jButton1.setEnabled(false);
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void atrasAccion(){
+        final Busqueda esto = this;
+        Atras.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()== this){
+                    Principal p = new Principal();
+                    p.setVisible(true);
+                    esto.dispose();
+                }
+            }
+        });
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        int buscar;
+        int prueba = 0;
+
+        ListaSimple lista = new ListaSimple();
+        Nodo nodo = new Nodo();
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Profesion");
+        modelo.addColumn("Promedio");
+        this.jTable1.setModel(modelo);
         //Codigo para buscar y leer los campos de texto (AQUI SE LLAMA LA FUNCION PARA BUSCAR)
-        switch(jComboBox1.getSelectedItem().toString()){
+        switch (jComboBox1.getSelectedItem().toString()) {
+
             case "Nombre":
-                JOptionPane.showMessageDialog(null, "Nombre");
-                campoNombre.getText();
-                
-                break;
+                try {
+                lista = Arbol.busquedaIndividual(campoNombre.getText(), Arbol.ArbolNombres);
+                nodo = lista.getInicio();
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Nombre incorrecto","Error",JOptionPane.ERROR_MESSAGE);
+            }
+            break;
+
             case "Profesion":
-                JOptionPane.showMessageDialog(null, "Profesion");
-                
-                campoProfesion.getText();
-                
-                break;
+                try {
+                lista = Arbol.busquedaIndividual(campoProfesion.getText(), Arbol.ArbolProfesion);
+                nodo = lista.getInicio();
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "La profesion no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            break;
+
             case "Promedio":
-                JOptionPane.showMessageDialog(null, "Promedio");
-                
-                campoPromedio.getText();//Parsear al tipo de dato de sus funciones
+                try{
+                buscar = Integer.parseInt(campoPromedio.getText());//Parsear al tipo de dato de sus funciones
+                lista = Arbol.busquedaIndividual(buscar, Arbol.ArbolCalificacion);
+                nodo = lista.getInicio();
+                }catch(NullPointerException e){
+                    JOptionPane.showMessageDialog(null, "El Promedio no se encuentra","Error", JOptionPane.ERROR_MESSAGE);
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Formato de promedio Incorrecto","Error", JOptionPane.ERROR_MESSAGE);
+                }
+                System.out.println(prueba);
                 break;
             case "Nombre/Profesion":
-                JOptionPane.showMessageDialog(null, "Nombre/Profesion");
-                campoNombre.getText();
-                campoProfesion.getText();
-                
+                try {
+                lista = Arbol.busquedaDobleNombreProf(campoProfesion.getText(), campoNombre.getText());
+                nodo = lista.getInicio();
+//                for (int i = 0; i < Arbol.listaEgresados.length; i++) {
+//                    try {
+//                        if ((int) nodo.getDato() == i) {
+//                            System.out.println(Arbol.listaEgresados[i]);
+//                            String arreglo[] = new String[3];
+//                            arreglo[0] = Arbol.listaEgresados[i].nombre;
+//                            arreglo[1] = Arbol.listaEgresados[i].profesion;
+//                            arreglo[2] = String.valueOf(Arbol.listaEgresados[i].calificacion);
+//                            modelo.addRow(arreglo);
+//                            nodo = nodo.getSiguiente();
+//                            prueba++;
+//                        }
+//                    } catch (Exception e) {
+//                        JOptionPane.showMessageDialog(null, "Nombre o Profesion incorrecto","Error",JOptionPane.ERROR_MESSAGE);
+//
+//                    }
+//
+//                }
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Nombre o Profesion incorrecto","Error",JOptionPane.ERROR_MESSAGE);
+            }
                 break;
             case "Nombre/Promedio":
-                JOptionPane.showMessageDialog(null, "Nombre/Promedio");
-                campoNombre.getText();
-                
-                campoPromedio.getText();//Parsear al tipo de dato de sus funciones
-                
-                break;
-            case "Profesion/Nombre":
-                JOptionPane.showMessageDialog(null, "Profesion/Nombre");
-                campoProfesion.getText();
-                campoNombre.getText();
-                
-                break;
+                try {
+                lista = Arbol.busquedaDobleNombre(Integer.parseInt(campoPromedio.getText()), campoNombre.getText());
+                nodo = lista.getInicio();
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Nombre o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+            break;
+            
             case "Profesion/Promedio":
-                JOptionPane.showMessageDialog(null, "Profesion/Promedio");
-                campoProfesion.getText();
-                campoPromedio.getText();//Parsear al tipo de dato de sus funciones
-                
-                break;
+                try {
+                lista = Arbol.busquedaDoble(Integer.parseInt(campoPromedio.getText()), campoProfesion.getText());
+                nodo = lista.getInicio();
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Profesion o Promedio No existente","Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+            break;
         }
+        nodo = lista.getInicio();
+            while(nodo!=null){
+               int index = (int)nodo.getDato();
+               String arreglo[] = new String[3];
+                    arreglo[0] = Arbol.listaEgresados[index].nombre;
+                    arreglo[1] = Arbol.listaEgresados[index].profesion;
+                    arreglo[2] = String.valueOf(Arbol.listaEgresados[index].calificacion);
+                    modelo.addRow(arreglo);
+                    nodo = nodo.getSiguiente();
+                }
+        
         jButton2.setEnabled(false);
         jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void menorCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menorCheckActionPerformed
-        mayorCheck.setSelected(false);
-        igualCheck.setSelected(false);
-    }//GEN-LAST:event_menorCheckActionPerformed
-
-    private void igualCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_igualCheckActionPerformed
-        mayorCheck.setSelected(false);
-        menorCheck.setSelected(false);
-    }//GEN-LAST:event_igualCheckActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,6 +381,7 @@ public class Busqueda extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Busqueda().setVisible(true);
             }
@@ -348,20 +389,17 @@ public class Busqueda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Atras;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField campoProfesion;
     private javax.swing.JTextField campoPromedio;
-    private javax.swing.JCheckBox igualCheck;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JCheckBox mayorCheck;
-    private javax.swing.JCheckBox menorCheck;
     // End of variables declaration//GEN-END:variables
 }
